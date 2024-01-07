@@ -2,7 +2,6 @@ const config = require("./utils/config");
 const express = require("express");
 require("express-async-errors");
 const app = express();
-/* app.use(express.static('static')); */
 const cors = require("cors");
 
 const portfoliosRouter = require("./controllers/portfolios");
@@ -34,6 +33,7 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 app.use(middleware.userExtractor);
+app.use(express.static("dist"));
 
 app.use("/api/portfolios", middleware.userExtractor, portfoliosRouter);
 app.use("/api/watchlists", middleware.userExtractor, watchlistsRouter);
